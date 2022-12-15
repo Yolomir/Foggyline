@@ -1,6 +1,6 @@
 <?php
 
-namespace Foggyline\Helpdesk\Model\ResourceModel\Ticket;
+namespace Foggyline\Helpdesk\Model\Resourcemodel\Ticket;
 
 class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\AbstractCollection
 {
@@ -12,10 +12,7 @@ class Collection extends \Magento\Framework\Model\ResourceModel\Db\Collection\Ab
      */
     protected function _construct()
     {
-        $this->_init(
-            'Foggyline\Helpdesk\Model\Ticket',
-            'Foggyline\Helpdesk\Model\ResourceModel\Ticket'
-        );
+        $this->_init('Foggyline\Helpdesk\Model\Ticket', 'Foggyline\Helpdesk\Model\Resourcemodel\Ticket');
     }
 }
 

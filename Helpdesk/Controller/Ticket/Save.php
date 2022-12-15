@@ -51,10 +51,7 @@ class Save extends \Foggyline\Helpdesk\Controller\Ticket
             $ticket->setCustomerId($this->customerSession->getCustomerId());
             $ticket->setTitle($title);
             $ticket->setSeverity($severity);
-            $ticket->setCreatedAt(
-                $this->dateTime
-                    ->formatDate(true)
-            );
+            $ticket->setCreatedAt($this->dateTime->formatDate(true));
             $ticket->setStatus(\Foggyline\Helpdesk\Model\Ticket::STATUS_OPENED);
             $ticket->save();
 
@@ -62,37 +59,36 @@ class Save extends \Foggyline\Helpdesk\Controller\Ticket
 
             /* Send email to store owner */
             $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
-            $transport = $this->transportBuilder->setTemplateIdentifier(
-                $this->scopeConfig->getValue('foggyline_helpdesk/email_template/store_owner', $storeScope)
-            )
+            $transport = $this->transportBuilder
+                ->setTemplateIdentifier($this->scopeConfig->getValue(
+                    'foggyline_helpdesk/email_template/store_owner', $storeScope)
+                )
                 ->setTemplateOptions(
                     [
-                    'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
-                    'store' => $this->storeManager->getStore()->getId(),
+                        'area' => \Magento\Framework\App\Area::AREA_FRONTEND,
+                        'store' => $this->storeManager->getStore()->getId(),
                     ]
                 )
                 ->setTemplateVars(['ticket' => $ticket])
                 ->setFrom(
                     [
-                    'name' => $customer->getFirstname() . ' ' . $customer->getLastname(),
-                    'email' => $customer->getEmail()
+                        'name' => $customer->getFirstname() . ' ' . $customer->getLastname(),
+                        'email' => $customer->getEmail()
                     ]
                 )
                 ->addTo(
-                    $this->scopeConfig->getValue(
-                        'trans_mail/ident_general/email', $storeScope
-                    )
+                    $this->scopeConfig->getValue('trans_email/ident_general/email', $storeScope)
                 )
                 ->getTransport();
+                
+                $transport->sendMessage();
+                $this->inlineTranslation->resume();
 
-            $transport->sendMessage();
-            $this->inlineTranslation->resume();
-
-            $this->messageManager->addSuccess(__('Ticket successfully created.'));
+                $this->messageManager->addSuccess(__('Ticket successfully created.'));
 
         }   catch (Exception $e) {
-            $this->messageManager->addError(__('Error occurred during Ticket creation.'));
-        }
+                $this->messageManager->addError(__('Error occurred during Ticket creation.'));
+            }
 
         return $resultRedirect->setRefererUrl();
     }

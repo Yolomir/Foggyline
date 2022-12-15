@@ -9,6 +9,7 @@
     <div class="field title required">
         <label class="label" for="title"><span>
             <?php echo __('Title') ?></span></label>
+
         <div class="control">
             <input
                 id="title"
@@ -20,18 +21,17 @@
         </div>
     </div>
     <div class="field severity">
-        <label class="label" for="severity"><span><?php echo __('Severity') ?></span></label>
+        <label class="label" for="severity">
+            <span><?php echo __('Severity') ?></span></label>
         <div class="control">
             <select name="severity">
-                <?php foreach ($block->getSeveritites() as $value
-                  => $name) : ?>
-                    <option value=<?php echo $value ?>
-                    <?php echo $this->escapeHtml($name) ?>
-                    </option>
+                <?php foreach ($block->getSeverities() as $value => $name) : ?>
+                    <option value="<?php echo $value ?>"><?php echo $this->escapeHtml($name) ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
     </div>
+
     <button type="submit" class="action save primary">
         <span><?php echo __('Submit Ticket') ?></span> 
     </button>
@@ -52,7 +52,8 @@
         <?php foreach ($tickets as $ticket): ?>
             <tr>
                 <td><?php echo $ticket->getId() ?></td>
-                <td><?php echo $block-escapeHtml($ticket->getTitle()) ?></td>
+                <td><?php echo $block->escapeHtml($ticket->getTitle()) ?></td>
+                <td><?php echo $ticket->getCreatedAt() ?></td>
                 <td><?php echo $ticket->getSeverityAsLabel() ?></td>
                 <td><?php echo $ticket->getStatusAsLabel() ?></td>
             </tr>

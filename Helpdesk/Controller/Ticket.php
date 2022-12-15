@@ -9,7 +9,8 @@ abstract class Ticket extends \Magento\Framework\App\Action\Action
     public function __construct(
         \Magento\Framework\App\Action\Context $context,
         \Magento\Customer\Model\Session $customerSession
-    ) {
+    ) 
+    {
         $this->customerSession = $customerSession;
         parent::__construct($context);
     }
@@ -19,10 +20,7 @@ abstract class Ticket extends \Magento\Framework\App\Action\Action
         if (!$this->customerSession->authenticate()) {
             $this->_actionFlag->set('', 'no-dispatch', true);
             if (!$this->customerSession->getBeforeUrl()) {
-                $this->customerSession->setBeforeUrl(
-                    $this->
-                    _redirect->getRefererUrl()
-                );
+                $this->customerSession->setBeforeUrl($this->_redirect->getRefererUrl());
             }
         }
         return parent::dispatch($request);

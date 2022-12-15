@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/
-     Layout/etc/page_configuration.xsd">
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
     <head>
         <title>Helpdesk Tickets</title>
     </head>
@@ -9,11 +8,11 @@
             <block class="Magento\Framework\View\Element\Html\Link\Current" name="foggyline-helpdesk-ticket">
                 <arguments>
                     <argument name="path" xsi:type="string">
-                         foggyline_helpdesk/ticket/index
-                    </argument>
+                        foggyline_helpdesk/ticket/index
+                        </argument>
                     <argument name="label" xsi:type="string">
-                         Helpdesk Tickets
-                    </argument>
+                        Helpdesk Tickets
+                        </argument>
                 </arguments>
             </block>
         </referenceBlock>
