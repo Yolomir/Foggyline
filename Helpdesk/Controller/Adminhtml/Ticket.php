@@ -2,9 +2,9 @@
 
 namespace Foggyline\Helpdesk\Controller\Adminhtml;
 
-class Ticket extends \Magento\Backend\App\Action
+abstract class Ticket extends \Magento\Backend\App\Action
 {
-    protected $resultFactory;
+    protected $resultPageFactory;
     protected $resultForwardFactory;
     protected $resultRedirectFactory;
 
@@ -22,9 +22,7 @@ class Ticket extends \Magento\Backend\App\Action
 
     protected function _isAllowed()
     {
-        /* _isAllowed probably causing bug */
-        return $this->_authorization->
-            _isAllowed('Foggyline_Helpdesk::ticket_manage');
+        return $this->_authorization->isAllowed('Foggyline_Helpdesk::ticket_manage');
     }
 
     protected function _initAction()

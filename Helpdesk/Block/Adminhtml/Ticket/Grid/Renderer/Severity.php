@@ -1,6 +1,6 @@
 <?php
 
-namespace Foggyline\Helpdesk\Block\Adminhtml;
+namespace Foggyline\Helpdesk\Block\Adminhtml\Ticket\Grid\Renderer;
 
 class Severity extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\AbstractRenderer
 {
@@ -13,7 +13,7 @@ class Severity extends \Magento\Backend\Block\Widget\Grid\Column\Renderer\Abstra
     )
     {
         parent::__construct($context, $data);
-        $this->ticketFacotry = $ticketFactory;
+        $this->ticketFactory = $ticketFactory;
     }
 
     public function render(\Magento\Framework\DataObject $row)
